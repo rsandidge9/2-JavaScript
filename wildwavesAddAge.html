@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Wild Waves Aquatic Park</title>
+</head>
+
+<body>
+    <h1>Wild Waves Aquatic Park</h1>
+    <button type="button" onclick="buyTicket()">Purchase Attraction</button>
+    <script>
+        const WAVE_POOL_MIN_HEIGHT = 42; // in inches
+        const WATERSLIDE_MIN_HEIGHT = 48; // in inches
+        const LAZY_RIVER_MIN_HEIGHT = 36; // in inches
+        const withAdult = "yes";
+             
+
+        function buyTicket() {
+            //function name (parameter 1, parameter 2 ...)
+            //the curly brackets - what do you want the function to do - set of instructions
+            //the variables below can only be called in this function
+            const attractionType = prompt('Which attraction do you want to visit: type "wave" for wave pool, "water" for waterslide, or "river" for lazy river?');
+            const userHeight = prompt('What is your height in inches?');
+            const userAge = Number(prompt("enter your age"));//enter age of buyer
+            const withAdult = prompt("Are you with your parent?");
+
+            //the prompt is the popup box
+            // const userAge = prompt ('What is your age?');
+            // if (withAdult) {
+            //     (userAge <= 18 && userHeight >= 43)
+            //     return true;
+            // }
+            // else { 
+            //     return false; 
+            // }
+            const isAllowed = checkHeight(attractionType, userHeight, userAge, withAdult);//these must match const in the function
+            //add age to verify the user age
+            console.log("User's selected attraction is " + attractionType);
+            console.log("User's height is " + userHeight);
+            console.log("User's age is " + userAge );
+            console.log("User is with parent " + withAdult);
+
+            if (isAllowed) {
+                alert('You are allowed to ride this attraction');
+            } else {
+                alert('You are not allowed to ride this attraction!');
+            }
+          }
+        
+        // function withAdult (height, age){
+        //     if(height<43 && age < 18 && withParent){
+        //         return false;
+        //     } else{
+        //         return true;
+        //     }
+        // }
+        function checkHeight (attraction, height, age, adult){
+            const MIN_HEIGHT_WITH_ADULT = 43;
+            const ADULT_WITH_CHILD = "yes";
+            if (withAdult){
+                //if child with an adult, adjust height
+                if (height <= MIN_HEIGHT_WITH_ADULT && age <= 17 && adult===ADULT_WITH_CHILD) {
+                    return true;
+              } 
+            // else if(attraction === "water" && height >= MIN_HEIGHT_WITH_ADULT && age >= 18){
+            //     return true;
+            //   } else if(attraction=== "river" && height >= MIN_HEIGHT_WITH_ADULT && age >= 18){
+            //     return true;
+            //   }
+              else if (attraction === "wave" && height >= WAVE_POOL_MIN_HEIGHT && age >= 18) {
+                      return true;//attraction in quotes is what was selected, then it looks at the const for the height, age is looking at the user age
+               } else if (attraction === "water" && height >= WATERSLIDE_MIN_HEIGHT && age >= 18) {
+                      return true; //condition for waterslide
+
+               } else if (attraction === "river" && height >= LAZY_RIVER_MIN_HEIGHT && age >= 18) {
+                      return true; //condition for lazy river
+
+               } else {
+                      return false; //Not allowed if requirements are not met
+                        // if (withAdult) 
+                        //     //if child with an adult, adjust height
+                        //     (height <= MIN_HEIGHT_WITH_ADULT && age <= 17) {
+                        //         return true
+                        //     }
+
+              }
+            }
+        // }
+        
+        // function checkHeight(attraction, height, age) //needs to be in the same order 
+        // //check height is in the isAllowed 
+        //         {
+        //     if (attraction === "wave" && height >= WAVE_POOL_MIN_HEIGHT && age >= 18) {
+        //         return true;//attraction in quotes is what was selected, then it looks at the const for the height, age is looking at the user age
+        //     }
+        //     else if (attraction === "water" && height >= WATERSLIDE_MIN_HEIGHT && age >= 18) {
+        //         return true; //condition for waterslide
+
+        //     } else if (attraction === "river" && height >= LAZY_RIVER_MIN_HEIGHT && age >= 18) {
+        //         return true; //condition for lazy river
+
+        //     } else {
+        //         return false; //what happens if none of these are true?
+        //     }
+        }
+    </script>
+</body>
+</html>
